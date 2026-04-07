@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Module for to_str function"""
+"""Module for sum_list function"""
 
 
-def sum_list(input_list:list[float]) -> float:
-    """Return the sum of a list of floats"""
-    return sum(input_list)
+a: int = 1
+pi: float = 3.14
+i_understand_annotations: bool = True
+school: str = "Holberton"
