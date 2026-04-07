@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 """Module for floor function"""
 
+import math
 
-from sympy import floor
 
-
-def floor_func(a: float) -> int:
+def floor(n: float) -> int:
     """Return the floor of a float"""
-    return floor(a)
+    return math.floor(n)
