@@ -4,5 +4,5 @@
 
 
 def to_str(a: float) -> str:
-    """Return the string representation of a float"""
+    """string representation of a float"""
     return str(a)
