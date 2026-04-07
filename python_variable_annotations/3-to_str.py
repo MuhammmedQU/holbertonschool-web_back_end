@@ -3,6 +3,6 @@
 
 
 
-def to_str(a: str) -> str:
-    """Return the string """
-    return a
+def to_str(a: float) -> str:
+    """Return the string representation of a float"""
+    return str(a)
