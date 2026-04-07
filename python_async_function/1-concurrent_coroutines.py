@@ -1,15 +1,8 @@
 #!/usr/bin/env python3
-"""Module that defines wait_random and wait_n coroutines."""
+"""Module that defines wait_n coroutine."""
 
 import asyncio
-import random
-
-
-async def wait_random(max_delay: int = 10) -> float:
-    """Return a random delay between 0 and max_delay after awaiting."""
-    delay: float = random.uniform(0, max_delay)
-    await asyncio.sleep(delay)
-    return delay
+from 0_basic_async_syntax import wait_random
 
 
 async def wait_n(n: int, max_delay: int = 10) -> list[float]:
