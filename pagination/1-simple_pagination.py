@@ -2,7 +2,7 @@
 """Simple pagination module."""
 
 import csv
-from typing import List, Tuple
+from typing import List
 
 index_range = __import__('0-simple_helper_function').index_range
 
@@ -31,8 +31,9 @@ class Server:
                  page_size: int = 10) -> List[List]:
         """Return a page of the dataset."""
 
-        assert isinstance(page, int) and isinstance(page_size, int), "page and page_size must be integers"
-        assert page > 0 and page_size > 0, "page and page_size must be positive integers"
+        assert (isinstance(page, int) and isinstance(page_size, int)), "page and page_size must be integers"
+
+        assert (page > 0 and page_size > 0), "page and page_size must be positive integers"
 
         dataset = self.dataset()
 
