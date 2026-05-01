@@ -2,7 +2,7 @@
 """Module providing simple pagination for a baby names dataset."""
 import csv
 import math
-from typing import List, Tuple
+from typing import Dict, List, Tuple
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
@@ -41,19 +41,23 @@ class Server:
         """
         assert isinstance(page, int) and page > 0
         assert isinstance(page_size, int) and page_size > 0
+
         start, end = index_range(page, page_size)
         data = self.dataset()
+
         if start >= len(data):
             return []
-        return data[start:end]
-    
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
-        """Return a dictionary containing pagination information and the page data."""
+        return data[start:end]
+
+    def get_hyper(self, page: int = 1,
+                  page_size: int = 10) -> Dict:
+        """Return pagination information and page data."""
+
         data = self.get_page(page, page_size)
         total_pages = math.ceil(len(self.dataset()) / page_size)
 
-        if total_pages - page > 0:
+        if page < total_pages:
             next_page = page + 1
         else:
             next_page = None
@@ -69,5 +73,5 @@ class Server:
             "data": data,
             "next_page": next_page,
             "prev_page": prev_page,
-            "total_pages": total_pages
+            "total_pages": total_pages,
         }
