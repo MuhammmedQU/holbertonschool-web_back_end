@@ -43,23 +43,21 @@ class Server:
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
         """Return pagination information and page data based on index."""
        
-        
-        assert index is not None and 0 <= index < len(self.dataset())
         data = self.indexed_dataset()
+        assert index is not None and 0 <= index < len(data)
+        
         result = []
         current_index = index
 
         while index < len(data) and len(result) < page_size:
             if current_index in data:
                 result.append(data[current_index])
-                current_index += 1
-            else:
-             current_index += 1
+            current_index += 1
             
   
         return {
             "index": index,
             "data": result,
-            "page_size": len(result),
+            "page_size": page_size,
             "next_index": current_index,
         }
