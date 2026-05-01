@@ -1,25 +1,23 @@
 #!/usr/bin/env python3
-"""
-Deletion-resilient hypermedia pagination
-"""
-
+"""Module providing deletion-resilient hypermedia pagination."""
 import csv
 import math
-from typing import List
+from typing import Dict, List
 
 
 class Server:
-    """Server class to paginate a database of popular baby names.
-    """
+    """Server class to paginate a database of popular baby names."""
+
     DATA_FILE = "Popular_Baby_Names.csv"
 
     def __init__(self):
+        """Initialize the Server with empty dataset
+        and indexed dataset caches."""
         self.__dataset = None
         self.__indexed_dataset = None
 
     def dataset(self) -> List[List]:
-        """Cached dataset
-        """
+        """Return the cached dataset, loading from CSV if not yet cached."""
         if self.__dataset is None:
             with open(self.DATA_FILE) as f:
                 reader = csv.reader(f)
@@ -29,11 +27,9 @@ class Server:
         return self.__dataset
 
     def indexed_dataset(self) -> Dict[int, List]:
-        """Dataset indexed by sorting position, starting at 0
-        """
+        """Return the dataset indexed by sorting position, starting at 0."""
         if self.__indexed_dataset is None:
             dataset = self.dataset()
-            truncated_dataset = dataset[:1000]
             self.__indexed_dataset = {
                 i: dataset[i] for i in range(len(dataset))
             }
@@ -49,7 +45,7 @@ class Server:
         result = []
         current_index = index
 
-        while index < len(data) and len(result) < page_size:
+        while current_index < len(data) and len(result) < page_size:
             if current_index in data:
                 result.append(data[current_index])
             current_index += 1
@@ -58,6 +54,6 @@ class Server:
         return {
             "index": index,
             "data": result,
-            "page_size": page_size,
+            "page_size": len(result),
             "next_index": current_index,
         }
