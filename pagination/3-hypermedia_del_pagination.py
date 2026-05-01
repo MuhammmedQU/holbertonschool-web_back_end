@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Module providing deletion-resilient hypermedia pagination."""
 import csv
+import math
 from typing import Dict, List
 
 
@@ -33,26 +34,23 @@ class Server:
                 i: dataset[i] for i in range(len(dataset))
             }
         return self.__indexed_dataset
-    
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
-        """Return pagination information and page data based on index."""
-       
-        data = self.indexed_dataset()
-        assert index is not None and 0 <= index < len(data)
-        
-        result = []
-        current_index = index
+        """Return a deletion-resilient page of data starting at index..
+        """
+        dataset = self.indexed_dataset()
+        assert index is not None and 0 <= index < len(dataset)
 
-        while current_index < len(data) and len(result) < page_size:
-            if current_index in data:
-                result.append(data[current_index])
-            current_index += 1
-            
-  
+        data = []
+        current = index
+        while len(data) < page_size:
+            if current in dataset:
+                data.append(dataset[current])
+            current += 1
+
         return {
-            "index": index,
-            "data": result,
-            "page_size": len(result),
-            "next_index": current_index,
+            'index': index,
+            'data': data,
+            'page_size': page_size,
+            'next_index': current,
         }
