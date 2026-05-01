@@ -31,9 +31,14 @@ class Server:
                  page_size: int = 10) -> List[List]:
         """Return a page of the dataset."""
 
-        assert (isinstance(page, int) and isinstance(page_size, int)), "page and page_size must be integers"
+        assert (
+            isinstance(page, int)
+            and isinstance(page_size, int)
+        ), "page and page_size must be integers"
 
-        assert (page > 0 and page_size > 0), "page and page_size must be positive integers"
+        assert (
+            page > 0 and page_size > 0
+        ), "page and page_size must be positive integers"
 
         dataset = self.dataset()
 
