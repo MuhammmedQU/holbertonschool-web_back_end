@@ -5,4 +5,4 @@ const getListStudentIds = (students) => {
   return students.map((student) => student.id);
 };
 
-export { getListStudents, getListStudentIds };
+export default getListStudentIds;
