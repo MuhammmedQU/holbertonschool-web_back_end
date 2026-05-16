@@ -12,7 +12,3 @@ const cleanSet = (set, startString) => {
 }
 
 export default cleanSet;
-
-
-console.log(cleanSet(new Set(['bonjovi', 'bonaparte', 'bonappetit', 'banana']), 'bon'));
-console.log(cleanSet(new Set(['bonjovi', 'bonaparte', 'bonappetit', 'banana']), ''));
