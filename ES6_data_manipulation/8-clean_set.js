@@ -4,7 +4,7 @@ const cleanSet = (set, startString) => {
     return ``;
   }
   for (const element of set) {
-    if (element.startsWith(startString) && typeof element === 'string') {
+    if (typeof element === 'string' && element.startsWith(startString)) {
       array.push(element.slice(startString.length));
     }
   }
