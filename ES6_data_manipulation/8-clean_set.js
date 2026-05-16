@@ -1,6 +1,6 @@
 const cleanSet = (set, startString) => {
   const array = [];
-  if (startString === ``) {
+  if (!startString) {
     return ``;
   }
   for (const element of set) {
@@ -12,3 +12,7 @@ const cleanSet = (set, startString) => {
 }
 
 export default cleanSet;
+
+
+console.log(cleanSet(new Set(['bonjovi', 'bonaparte', 'bonappetit', 'banana']), 'bon'));
+console.log(cleanSet(new Set(['bonjovi', 'bonaparte', 'bonappetit', 'banana']), ''));
